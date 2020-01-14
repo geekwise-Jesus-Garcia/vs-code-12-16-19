@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import BranchModal from "./Modal";
 import axios from "axios";
 import { HashRouter as Router, Route } from "react-router-dom";
+// import { AiOutlineBank } from 'react-icons/fa';
+
 
 
 
@@ -131,7 +133,7 @@ class Branch extends Component {
   render() {
     return (
       <main className="content">
-        <h1 className="text-white text-uppercase text-center my-4">Bank App</h1>
+        <h1 className="text-white text-uppercase text-center my-4"> Bank App </h1>
         <div className="row ">
           <div className="col-md-6 col-sm-10 mx-auto p-0">
             <div className="card p-3">

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logout } from "../../actions/auth";
 import {AuthContext} from '../../context/AuthProvider';
+import { FaHome } from 'react-icons/fa';
 
 
 export class Header extends Component {
@@ -65,7 +66,7 @@ export class Header extends Component {
             <span className="navbar-toggler-icon" />
           </button>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <Link to="/" className="navbar-brand">Home</Link>
+            <Link to="/" className="navbar-brand"> <FaHome/> Home</Link>
           </div>
           {isAuthenticated ? authLinks : guestLinks}
         </div>

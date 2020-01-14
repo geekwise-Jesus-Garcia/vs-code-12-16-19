@@ -2,7 +2,13 @@ from rest_framework import serializers
 from django.contrib.auth.models import User, Permission
 from django.contrib.auth import authenticate
 
-# PERMISSIONS
+# PERMISSIONS serializers
+
+# class Certain_User_Serializer(serializers.ModelSerializer):
+#     class Meta:
+#         models = User
+#         fields = ('id', 'username', 'email', 'groups' )
+#         fields = f"groups.objects.all()
 
 class PermissionSerializer(serializers.ModelSerializer):
     class Meta:
