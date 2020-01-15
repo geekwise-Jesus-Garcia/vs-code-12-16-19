@@ -9,7 +9,6 @@ import { Provider } from 'react-redux';
 import store from "./store";
 import { loadUser } from './actions/auth';
 import AuthProvider from './context/AuthProvider'
-import SideBar from "./components/Layout/sidebar";
 
 
 class App extends Component {
@@ -25,7 +24,6 @@ class App extends Component {
         <Header/>
         <Switch>
         <PrivateRoute exact path="/" component={Branch}/>
-        <Route exact path='/' component={SideBar}/>
         <Route exact path="/login" component={Login}/>
         <Route exact path="/register" component={Register}/>
         </Switch>
