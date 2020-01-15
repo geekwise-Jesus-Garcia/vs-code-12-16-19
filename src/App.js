@@ -19,16 +19,16 @@ class App extends Component {
   render(){
     return(
       <AuthProvider>
-      <Provider store={store}>
-      <Router>
-        <Header/>
-        <Switch>
-        <PrivateRoute exact path="/" component={Branch}/>
-        <Route exact path="/login" component={Login}/>
-        <Route exact path="/register" component={Register}/>
-        </Switch>
-    </Router>
-    </Provider>
+        <Provider store={store}>
+          <Router>
+            <Header/>
+              <Switch>
+              <PrivateRoute exact path="/" component={Branch}/>
+              <Route exact path="/login" component={Login}/>
+              <Route exact path="/register" component={Register}/>
+            </Switch>
+        </Router>
+      </Provider>
     </AuthProvider>
     );
   }

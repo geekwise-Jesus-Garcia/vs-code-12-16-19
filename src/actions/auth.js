@@ -68,7 +68,7 @@ export const login = (username, password) => dispatch => {
           dispatch({
               type: LOGIN_FAIL
           });
-          alert(err.response.data.non_field_errors);
+        //   alert(err.response.data.non_field_errors);
       });
 };
 // Register new user
