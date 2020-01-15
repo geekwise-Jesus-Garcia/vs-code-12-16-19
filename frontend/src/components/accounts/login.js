@@ -42,14 +42,14 @@ onSubmit = e => {
                     />
                   </div>
 
-                  <div className="form-group">
+                  {/* <div className="form-group">
                     <label htmFor="exampleFormControlSelect1">Groups</label>
                     <select className="form-control" id="exampleFormControlSelect1">
                       <option>Management</option>
                       <option>Teller</option>
                       <option>Customer</option>
                     </select>
-                  </div>
+                  </div> */}
 
                   <div className="form-group">
                     <label>Password</label>
