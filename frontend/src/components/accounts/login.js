@@ -41,6 +41,16 @@ onSubmit = e => {
                       value={username}
                     />
                   </div>
+
+                  <div className="form-group">
+                    <label htmFor="exampleFormControlSelect1">Groups</label>
+                    <select className="form-control" id="exampleFormControlSelect1">
+                      <option>Management</option>
+                      <option>Teller</option>
+                      <option>Customer</option>
+                    </select>
+                  </div>
+
                   <div className="form-group">
                     <label>Password</label>
                     <input
