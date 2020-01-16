@@ -6,9 +6,9 @@ import authReducer from './authReducer';
 export const AuthContext = createContext();
 
 export default function AuthProvider(props) {
-    const user = {
-        name: 'Gerald'
-    }
+    // const user = {
+    //     name: 'Gerald'
+    // }
 
     const [ auth, dispatch ] = useReducer(authReducer, []);
 
