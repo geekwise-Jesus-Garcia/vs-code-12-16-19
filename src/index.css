@@ -6,7 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #282c34;
+  background-color: #09358b;
 }
 .todo-title {
   cursor: pointer;
@@ -16,12 +16,12 @@ body {
 }
 .tab-list > span {
   padding: 5px 8px;
-  border: 1px solid #282c34;
+  border: 1px solid #6b8ac7;
   border-radius: 10px;
   margin-right: 5px;
   cursor: pointer;
 }
 .tab-list > span.active {
-  background-color: #282c34;
+  background-color: #d38013;
   color: #ffffff;
 }

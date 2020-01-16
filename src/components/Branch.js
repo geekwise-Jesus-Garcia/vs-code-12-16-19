@@ -45,19 +45,19 @@ class Branch extends Component {
             Branch
         </span>
         <span
-            onClick={() => this.displayCustomer(false)}
+            // onClick={() => this.displayCustomer(false)}
             className={this.state.viewCompleted ? "" : "active" }
         >
             Customer
         </span>
         <span
-            onClick={() => this.displayProduct(false)}
+            // onClick={() => this.displayProduct(false)}
             className={this.state.viewCompleted ? "" : "active"}
         >
             Products
         </span>
         <span
-            onClick={() => this.displayAccount(false)}
+            // onClick={() => this.displayAccount(false)}
             className={this.state.viewCompleted ? "" : "active"} 
         >
             Account
