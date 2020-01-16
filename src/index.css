@@ -6,8 +6,21 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #09358b;
+  background-color: #445366;
 }
+
+.btn-info {
+  color: #fff;
+  background-color: #445366;
+  border-color: #445366;
+}
+
+.btn-danger {
+  color: #fff;
+  background-color: #5d7791;
+  border-color: #445366;
+}
+
 .todo-title {
   cursor: pointer;
 }
@@ -22,6 +35,6 @@ body {
   cursor: pointer;
 }
 .tab-list > span.active {
-  background-color: #d38013;
+  background-color: #445366;
   color: #ffffff;
 }
