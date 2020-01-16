@@ -44,7 +44,10 @@ class Branch extends Component {
         >
             Branch
         </span>
-        <span
+
+        {/* commit out for other branchs that arnt working */}
+        
+        {/* <span
             onClick={() => this.displayCustomer(false)}
             className={this.state.viewCompleted ? "" : "active" }
         >
@@ -62,7 +65,7 @@ class Branch extends Component {
         >
             Account
         </span>
-        </div>
+        </div> */}
     );
     };
   renderItems = () => {
