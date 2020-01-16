@@ -1,4 +1,4 @@
-<img src="https://attestationupdate.files.wordpress.com/2015/08/bank-building.jpg" align="right" />
+<img src="https://attestationupdate.files.wordpress.com/2015/08/bank-building.jpg" width="200" height="40" align="right" />
 
 
 
