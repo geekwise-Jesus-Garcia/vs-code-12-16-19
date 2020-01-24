@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from knox.models import AuthToken
 from .serializers import UserSerializer, RegisterSerializer, LoginSerializer, passwordSerializer
 from rest_framework.views import APIView
+from django.contrib.auth.models import User, Group
 
 # Register API
 
@@ -46,7 +47,7 @@ class UserAPI(generics.RetrieveAPIView):
 class PasswordAPI(APIView):
 
     def get_object(self, username):
-        user = generics.get_object_or_400(User, username=username)
+        user = generics.get_object_or_404(User, username=username)
         return user
     
     def put(self, request):
