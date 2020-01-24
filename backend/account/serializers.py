@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from django.contrib.auth.models import User, Permission
+from django.contrib.auth.models import User, Permission, Group
 from django.contrib.auth import authenticate
 from rest_framework.views import APIView
 
@@ -63,7 +63,14 @@ class LoginSerializer(serializers.Serializer):
             return user
         raise serializers.ValidationError("Incorrect Credentials")
 
+# group serializer
+class GroupSerializer(serializers.Serializer):
+    class Meta:
+        model = Group
+        fields = '__all__'
 
+
+# reset password
 class passwordSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()
@@ -75,8 +82,7 @@ class passwordSerializer(serializers.Serializer):
         pass
 
     def validate(self, data):
-        """
-        """
+        """ check that username and new password are different """
         if data["username"] == ["password"]:
             raise serializers.ValidationError("Password should be different")
         return data

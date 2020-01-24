@@ -6,7 +6,8 @@ import { resetPassword } from '../../actions/auth'
 
 
 
-export class ResetPassword extends Component {
+class ResetPassword extends Component {
+
     state = {
         username: "", 
         password: "",
@@ -15,18 +16,18 @@ export class ResetPassword extends Component {
 
     componentDidMount(){
       this.setState({justReset:false})
+      console.log(this.props)
     }
 
     // on submit target the property of old and new password
-
 onSubmit = e => {
         e.preventDefault();
-        console.log(this.state.password,this.state.username)
+        console.log (this.props)
         this.props.resetPassword(this.state.username, this.state.password)
         this.setState({ justReset: true})
     }
     //saving the value of inserted input
-    onChange = e => 
+onChange = e => 
         this.setState({ [e.target.name]: e.target.value })
     
     render() {
@@ -78,4 +79,7 @@ onSubmit = e => {
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
-export default connect(mapStateToProps, { resetPassword })(ResetPassword);
+const mapDispatchToProps = dispatch => ({
+  resetPassword: (email, password) => dispatch(resetPassword(email, password))
+})
+export default connect(mapStateToProps, mapDispatchToProps)(ResetPassword);
