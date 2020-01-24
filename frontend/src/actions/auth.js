@@ -8,7 +8,9 @@ import {
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
     REGISTER_FAIL,
-    REGISTER_SUCCESS
+    REGISTER_SUCCESS,
+    RESET_SUCCESS,
+    RESET_FAIL,
 }
 from './types';
 
@@ -71,6 +73,33 @@ export const login = (username, password) => dispatch => {
           alert(err.response.data.non_field_errors);
       });
 };
+//resetpassword
+export const resetPassword = (username, password) =>  (dispatch, getState) => {
+    //Headers
+    const config = {
+        headers: {
+            'Content-type':'application/json'
+        }
+    }
+
+    //request body
+    const body = JSON.stringify({ username, password});
+    axios
+        .put('http://127.0.0.1:8000/users/password', body, tokenConfig(getState))
+        .then(res => {
+            dispatch({
+                type: RESET_SUCCESS,
+                payload: res.data
+            });
+        })
+        .catch(err => {
+            // dispatch(returnErrors(err.response.data, err.response.status));
+            dispatch({
+                type:RESET_FAIL
+            });
+            // alert(err.response.data.non_field_errors);
+        });
+};
 // Register new user
 export const register = ({ username, email, password }) => dispatch => {
     // Headers
@@ -92,7 +121,7 @@ export const register = ({ username, email, password }) => dispatch => {
       })
       .catch(err => {
           dispatch(returnErrors(err.response.data, err.response.status));
-          dispatch({
+          dispatch({ 
               type: REGISTER_FAIL
           });
           alert(err.response.data.username);
@@ -123,3 +152,19 @@ export const logout = () => (dispatch, getState) => {
           dispatch(returnErrors(err.response.data, err.response.status));
       });
 };
+
+export const tokenConfig = getState =>{
+    //get token from state
+    const token = getState().auth.token
+    //headers
+    const config = {
+        headers: {
+            'Content-Type':'application/json'
+        }
+    }
+    // If token, add to headers config
+    if(token) {
+        config.headers['Authorization'] = `Token ${token}` ;
+    }
+    return config
+}

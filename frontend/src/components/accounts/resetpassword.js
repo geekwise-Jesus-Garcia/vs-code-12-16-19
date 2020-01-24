@@ -2,33 +2,39 @@ import React, { Component } from 'react';
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { login } from "../../actions/auth";
+import { resetPassword } from '../../actions/auth'
+
 
 
 export class ResetPassword extends Component {
     state = {
         username: "", 
-        password: ""
+        password: "",
+        justReset: false,
     };
+
+    componentDidMount(){
+      this.setState({justReset:false})
+    }
 
     // on submit target the property of old and new password
 
-//     static propTypes = {
-//       login: PropTypes.func.isRequired,
-//       isAuthenticated: PropTypes.bool
-//   };
 onSubmit = e => {
         e.preventDefault();
-        console.log('submit')
-        this.props.resetpassword(this.state.username, this.state.password);
-    };
-    //saving the value of inserted input
-    onChange = e => {
-        this.setState({ [e.target.name]: e.target.value });
+        console.log(this.state.password,this.state.username)
+        this.props.resetPassword(this.state.username, this.state.password)
+        this.setState({ justReset: true})
     }
+    //saving the value of inserted input
+    onChange = e => 
+        this.setState({ [e.target.name]: e.target.value })
+    
     render() {
         if(this.props.isAuthenticated){
             return <Redirect to ='/branch'/>
+        }
+        if(this.state.justReset){
+          return <Redirect to="/login"/>
         }
     const { username, password } = this.state;
         return (
@@ -37,9 +43,9 @@ onSubmit = e => {
                 <h2 className="text-center">Reset Password</h2>
                 <form onSubmit={this.onSubmit}>
                   <div className="form-group">
-                    <label>Username</label>
+                    <label>username</label>
                     <input
-                      type="text"
+                      type="username"
                       className="form-control"
                       name="username"
                       onChange={this.onChange}
@@ -56,12 +62,12 @@ onSubmit = e => {
                       value={password}
                     />
                   </div>
+
                   <div className="form-group">
-                    <button type="submit" className="btn btn-primary">Login</button>
+                    <button type="submit" className="btn btn-primary">
+                        Reset
+                    </button>
                   </div>
-                  <p>
-                    Don't have an account? <Link to="/register">Register</Link> | <link to="/resetpassword">Reset Password</link>
-                  </p>
                 </form>
               </div>
             </div>
@@ -72,4 +78,4 @@ onSubmit = e => {
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
-export default connect(mapStateToProps, { resetpassword })(ResetPassword);
+export default connect(mapStateToProps, { resetPassword })(ResetPassword);

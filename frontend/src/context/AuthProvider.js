@@ -7,7 +7,7 @@ export const AuthContext = createContext();
 
 export default function AuthProvider(props) {
     const user = {
-        name: 'Gerald'
+        name: 'user'
     }
 
     const [ auth, dispatch ] = useReducer(authReducer, []);

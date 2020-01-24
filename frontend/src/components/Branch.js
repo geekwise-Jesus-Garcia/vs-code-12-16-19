@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import BranchModal from "./Modal";
 import axios from "axios";
-import { HashRouter as Router, Route } from "react-router-dom";
+// import { HashRouter as Router, Route } from "react-router-dom";
 // import { AiOutlineBank } from 'react-icons/fa';
 
 

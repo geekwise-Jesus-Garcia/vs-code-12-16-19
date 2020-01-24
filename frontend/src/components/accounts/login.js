@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { login } from "../../actions/auth";
+import { login, register} from "../../actions/auth";
+
 
 
 export class Login extends Component {
@@ -65,7 +66,7 @@ onSubmit = e => {
                     <button type="submit" className="btn btn-primary">Login</button>
                   </div>
                   <p>
-                    Don't have an account? <Link to="/register">Register</Link>
+                    Don't have an account? <Link to="/register">Register</Link> | <Link to="/resetpassword">Reset password</Link>
                   </p>
                 </form>
               </div>
