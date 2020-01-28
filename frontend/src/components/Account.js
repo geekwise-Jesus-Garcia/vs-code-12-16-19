@@ -1,63 +1,94 @@
-// import React, { Component } from "react";
-// import {
-//   Button,
-//   Modal,
-//   ModalHeader,
-//   ModalBody,
-//   ModalFooter,
-//   Form,
-//   FormGroup,
-//   Input,
-//   Label
-// } from "reactstrap";
+import React, { Component } from 'react';
+import axios from 'axios';
+import Model from './Model';
+import AddItem from './AddItem'
 
-// export default class CustomModal extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       activeItem: this.props.activeItem
-//     };
-//   }
-//   handleChange = e => {
-//     let { name, value } = e.target;
-//     const activeItem = { ...this.state.activeItem, [name]: value };
-//     this.setState({ activeItem });
-//   };
-//   render() {
-//     const { toggle, onSave } = this.props;
-//     return (
-//       <Modal isOpen={true} toggle={toggle}>
-//         <ModalHeader toggle={toggle}> Bank </ModalHeader>
-//         <ModalBody>
-//           <Form>
-//             <FormGroup>
-//               <Label for="branch_name">Branch Name</Label>
-//               <Input
-//                 type="text"
-//                 name="branch_name"
-//                 value={this.state.activeItem.branch_name}
-//                 onChange={this.handleChange}
-//                 placeholder="Bank Name"
-//               />
-//             </FormGroup>
-//             <FormGroup>
-//               <Label for="branch_location">branch location</Label>
-//               <Input
-//                 type="text"
-//                 name="branch_location"
-//                 value={this.state.activeItem.branch_location}
-//                 onChange={this.handleChange}
-//                 placeholder="Enter Location"
-//               />
-//             </FormGroup>
-//           </Form>
-//         </ModalBody>
-//         <ModalFooter>
-//           <Button color="success" onClick={() => onSave(this.state.activeItem)}>
-//             Save
-//           </Button>
-//         </ModalFooter>
-//       </Modal>
-//     );
-//   }
-// }
+let CancelToken = axios.CancelToken;
+let cancel;
+
+export class Accounts extends Component {
+    state = {
+        accountsList: [],
+    }
+
+    deleteAccount = (accountId)=> {
+        // console.log(acc)
+        axios.delete(`https://g-f-django-bank-app.herokuapp.com/accounts/${accountId}/`)
+        .then(res => this.setState({accountsList: this.state.accountsList.filter(
+            account => account.id !== accountId
+        )}))
+    }
+    
+    addAccount = (submitText)=> {
+        axios.post('https://g-f-django-bank-app.herokuapp.com/accounts/',
+        {
+            name: submitText
+        }).then(res => this.setState(
+            {accountsList: [res.data, ...this.state.accountsList]}
+        )).catch(err => console.log(err));
+    }
+
+    updateAccount = (accountId, accountName) => {
+        let body = {
+          id: accountId,
+          name: accountName
+      }
+
+      axios.put(`https://g-f-django-bank-app.herokuapp.com/accounts/${accountId}/`, body)
+      .then(res => {
+          this.refreshAccounts();
+      }).catch(err => console.log(err));
+    }
+
+    componentDidMount() {
+        this.refreshAccounts()
+    }
+
+    componentWillUnmount() {
+        cancel();
+    }
+
+
+    refreshAccounts = () => {
+        let cancelToken = new CancelToken(function executor(c) {
+            cancel = c;
+          })
+        axios.get('https://g-f-django-bank-app.herokuapp.com/accounts/', {
+            cancelToken: cancelToken
+        })
+        .then(res => {this.setState({accountsList: res.data})
+        })
+        .catch(err => console.log(err))
+    }
+
+    renderAccounts = () => {
+        let accountsList = this.state.accountsList
+        
+        return accountsList.map(account => (
+            <Model deleteItem={this.deleteAccount} editItem={this.updateAccount}
+            key={account.id} item={account}/>
+        ));
+    };
+
+    branchStyle = {
+        width: '100%',
+        marginTop: '55px',
+    }
+
+    render() {
+        return (
+            <div style={this.branchStyle}>
+                <div>
+                    <AddItem 
+                    placeholder={"Account's name"} addItem={this.addAccount}
+                    />
+                </div>
+                <div>
+                    {this.renderAccounts()}
+                </div>
+            </div>
+        )
+    }
+}
+
+export default Accounts

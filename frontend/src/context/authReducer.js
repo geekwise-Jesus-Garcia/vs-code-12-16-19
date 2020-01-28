@@ -1,5 +1,5 @@
 const user = {
-    name: 'Gerald'
+    name: 'Jesus'
 }
 const authReducer = (state, action) => {
     switch (action.type) {
